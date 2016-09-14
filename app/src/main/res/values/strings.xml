@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">TesisApp</string>
+    <string name="btnBuscarViaje">Buscar Viaje</string>
+    <string name="btnBuscarEmpresa">Buscar Empresa</string>
+    <string name="btnMostrarEmpresa">Mostrar Empresa</string>
+    <string name="btnViajesActuales">Viajes Actuales</string>
+    <string name="tvCiudadOrigen">Ciudad Origen</string>
+    <string name="tvCiudadDestino">Ciudad Destino</string>
+    <string name="tvHora">Hora</string>
+    <string name="btnMapa">Mapa</string>
+    <string name="title_activity_mapa">Map</string>
+    <string name="tvNombreEmp">Nombre</string>
+    <string name="tvCorreoEmp">Correo</string>
+    <string name="tvDireccionEmp">Dirección</string>
+    <string name="tvTelefonoEmp">Telefono</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_viajes_actuales">Map</string>
+
+    <string-array name="dias">
+        <item>Lunes</item>
+        <item>Martes</item>
+        <item>Miercoles</item>
+        <item>Jueves</item>
+        <item>Viernes</item>
+        <item>Sabado</item>
+        <item>Domingo</item>
+    </string-array>
+
+</resources>

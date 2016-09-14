@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.example.daniel.tesisapp.BuscarEmpresaActivity"
+    android:id="@+id/RLEmpresa">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/tvCiudadOrigen"
+        android:id="@+id/tvCiudadOrigen"
+        android:layout_alignWithParentIfMissing="true"
+        android:layout_alignTop="@+id/spnCiudadOrigen"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/tvCiudadDestino"
+        android:id="@+id/tvCiudadDestino"
+        android:paddingTop="20dp"
+        android:layout_below="@+id/tvCiudadOrigen"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="46dp" />
+
+    <Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/spnCiudadOrigen"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/tvCiudadDestino"
+        android:layout_toEndOf="@+id/tvCiudadDestino" />
+
+    <Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/spnCiudadDestino"
+        android:layout_alignTop="@+id/tvCiudadDestino"
+        android:layout_alignLeft="@+id/spnCiudadOrigen"
+        android:layout_alignStart="@+id/spnCiudadOrigen"
+        android:paddingTop="20dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Rango de Hora"
+        android:id="@+id/tvHora"
+        android:paddingTop="40dp"
+        android:paddingRight="10dp"
+        android:layout_below="@+id/spnCiudadDestino"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentEnd="false"
+        android:layout_alignParentStart="false" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Desde"
+        android:id="@+id/tvDesde"
+        android:paddingTop="40dp"
+        android:paddingRight="20dp"
+        android:layout_below="@+id/tvHora"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Buscar"
+        android:id="@+id/btnBuscarViaje"
+        android:layout_marginTop="68dp"
+        android:layout_below="@+id/tvDesde"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="time"
+        android:ems="10"
+        android:id="@+id/etDesde"
+        android:layout_alignBottom="@+id/tvDesde"
+        android:layout_toRightOf="@+id/tvDesde"
+        android:layout_alignParentStart="false"
+        android:autoText="false"
+        android:layout_toLeftOf="@+id/tvHasta" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Hasta"
+        android:id="@+id/tvHasta"
+        android:paddingTop="40dp"
+        android:paddingRight="20dp"
+        android:layout_alignBottom="@+id/etDesde"
+        android:layout_alignRight="@+id/tvHora"
+        android:layout_alignEnd="@+id/tvHora" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="time"
+        android:ems="10"
+        android:id="@+id/etHasta"
+        android:autoText="false"
+        android:layout_alignTop="@+id/etDesde"
+        android:layout_toRightOf="@+id/tvHasta"
+        android:layout_toEndOf="@+id/tvHasta" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvNombreCiudadOrigen"
+        android:layout_marginTop="58dp"
+        android:textIsSelectable="true"
+        android:textSize="18dp"
+        android:layout_below="@+id/btnBuscarViaje"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvNombreCiudadDestino"
+        android:textIsSelectable="true"
+        android:textSize="18dp"
+        android:layout_alignTop="@+id/tvNombreCiudadOrigen"
+        android:layout_alignLeft="@+id/tvHora"
+        android:layout_alignStart="@+id/tvHora" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvHoraOrigen"
+        android:textIsSelectable="true"
+        android:textSize="18dp"
+        android:layout_alignTop="@+id/tvNombreCiudadDestino"
+        android:layout_toRightOf="@+id/tvHasta"
+        android:layout_toEndOf="@+id/tvHasta" />
+
+    <Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/spnDia"
+        android:paddingTop="20dp"
+        android:layout_below="@+id/etDesde"
+        android:layout_centerHorizontal="true" />
+
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/lvViajes"
+        android:layout_below="@+id/btnBuscarViaje"
+        android:layout_alignEnd="@+id/btnBuscarViaje" />
+
+</RelativeLayout>
+
