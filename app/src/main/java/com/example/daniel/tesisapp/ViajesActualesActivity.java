@@ -96,7 +96,8 @@ public class ViajesActualesActivity extends FragmentActivity implements OnMapRea
                 LatLng TerPurr = new LatLng(cursorTerBusLU.getDouble(0), cursorTerBusLU.getDouble(1));
                 mMap.addMarker(new MarkerOptions()
                         .position(TerPurr)
-                        .title(cursorTerBusLU.getString(2)));
+                        .title(cursorTerBusLU.getString(2))
+                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.icono_terminal)));
             } while (cursorTerBusLU.moveToNext());
             cursorTerBusLU.close();
         }
@@ -107,7 +108,8 @@ public class ViajesActualesActivity extends FragmentActivity implements OnMapRea
                 LatLng MerOso = new LatLng(cursorTerMerOso.getDouble(0), cursorTerMerOso.getDouble(1));
                 mMap.addMarker(new MarkerOptions()
                         .position(MerOso)
-                        .title(cursorTerMerOso.getString(2)));
+                        .title(cursorTerMerOso.getString(2))
+                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.icono_terminal)));
             } while (cursorTerMerOso.moveToNext());
             cursorTerMerOso.close();
         }
@@ -118,9 +120,22 @@ public class ViajesActualesActivity extends FragmentActivity implements OnMapRea
                 LatLng TerPurr = new LatLng(cursorTerPurr.getDouble(0), cursorTerPurr.getDouble(1));
                 mMap.addMarker(new MarkerOptions()
                         .position(TerPurr)
-                        .title(cursorTerPurr.getString(2)));
+                        .title(cursorTerPurr.getString(2))
+                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.icono_terminal)));
             } while (cursorTerPurr.moveToNext());
             cursorTerPurr.close();
+        }
+
+        Cursor cursorTerSP = db.rawQuery("SELECT Latitud,Longitud,Nombre FROM terminal WHERE Nombre='Terminal de Buses de San Pablo'", null);
+        if (cursorTerSP.moveToFirst()) {
+            do {
+                LatLng TerSP = new LatLng(cursorTerSP.getDouble(0), cursorTerSP.getDouble(1));
+                mMap.addMarker(new MarkerOptions()
+                        .position(TerSP)
+                        .title(cursorTerSP.getString(2))
+                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.icono_terminal)));
+            } while (cursorTerSP.moveToNext());
+            cursorTerSP.close();
         }
 
 
@@ -134,7 +149,7 @@ public class ViajesActualesActivity extends FragmentActivity implements OnMapRea
         mMap.addMarker(new MarkerOptions()
                 .position(me)
                 .title("holi")
-                .icon(BitmapDescriptorFactory.fromResource(R.drawable.asd)));
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.icono_bus)));
 
         mMap.moveCamera(CameraUpdateFactory.newLatLng(me));
         googleMap.animateCamera(CameraUpdateFactory.zoomTo(17), 2000, null);
