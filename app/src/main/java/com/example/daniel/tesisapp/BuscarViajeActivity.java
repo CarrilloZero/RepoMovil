@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.example.daniel.tesisapp.beans.Ciudad;
 import com.example.daniel.tesisapp.beans.CiudadDAO;
@@ -61,7 +62,6 @@ public class BuscarViajeActivity extends AppCompatActivity implements View.OnCli
         String dia = spnDia.getSelectedItem().toString();
         Time.valueOf(getHoraHasta+getHoraDesde);
 
-
         int ciudadOrigen = 0,ciudadDestino = 0;
         String ciudadOrigenNombre = null,ciudadDestinoNombre = null;
 
@@ -111,6 +111,9 @@ public class BuscarViajeActivity extends AppCompatActivity implements View.OnCli
                 lvViajes.setAdapter(adapterViajes);
                 helper.close();
                 cc.close();
+            }
+            if(cc.getCount()==0){
+                Toast.makeText(BuscarViajeActivity.this, "Viaje no encontrado", Toast.LENGTH_SHORT).show();
             }
         }catch (Exception ex){
             ex.printStackTrace();

@@ -58,10 +58,8 @@
         android:id="@+id/tvHora"
         android:paddingTop="40dp"
         android:paddingRight="10dp"
-        android:layout_below="@+id/spnCiudadDestino"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentEnd="false"
-        android:layout_alignParentStart="false" />
+        android:layout_below="@+id/tvCiudadDestino"
+        android:layout_toEndOf="@+id/tvCiudadOrigen" />
 
     <TextView
         android:layout_width="wrap_content"
