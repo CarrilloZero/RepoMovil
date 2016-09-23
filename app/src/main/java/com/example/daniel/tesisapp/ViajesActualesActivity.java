@@ -49,12 +49,14 @@ public class ViajesActualesActivity extends FragmentActivity implements OnMapRea
         Ubicacion Obu = new Ubicacion(this);
         double longitud = Obu.obtenerLongitud();
         double latitud = Obu.obtenerLatitud();
-        double latitudLaUnion = -40.293437;
-        double longitudLaUnion = -73.0716605;
         // Instantiates a new Polyline object and adds points to define a rectangle
 
 
-        /*PolylineOptions rutaOsornoUnion = new PolylineOptions()
+        /*
+         SHA1 C9:C0:0E:74:6B:6F:8B:B2:EF:55:E4:4E:69:D9:99:5A:34:AE:61:88
+         Client ID 285592340890-2fm4ee3nvl802m57hq221h6a03t2u9c2.apps.googleusercontent.com
+
+        PolylineOptions rutaOsornoUnion = new PolylineOptions()
                 .add(new LatLng(-40.5731558,-73.1285305))
                 .add(new LatLng(-40.5732074,-73.1275684))
                 .add(new LatLng(-40.5736133,-73.1245077))
@@ -144,7 +146,6 @@ public class ViajesActualesActivity extends FragmentActivity implements OnMapRea
 
         // Add a marker in Sydney and move the camera
         LatLng me = new LatLng(latitud, longitud);
-        LatLng asdasd = new LatLng(latitudLaUnion, longitudLaUnion);
 
         mMap.addMarker(new MarkerOptions()
                 .position(me)

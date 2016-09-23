@@ -29,12 +29,18 @@ import com.google.android.gms.common.api.ResultCallback;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener,GoogleApiClient.OnConnectionFailedListener  {
 
     private Button btnBuscarEmpresa,btnMapa,btnBuscarViaje,btnViajesActuales;
     private SignInButton btnGoogle;
     private ImageButton btnComentario;
     private int PERMISSION_CODE_1= 23;
+    private GoogleApiClient apiClient;
+    private static final int RC_SIGN_IN = 1001;
+    private ProgressDialog asd = null;
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,19 +60,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnComentario = (ImageButton) findViewById(R.id.ibtnComentario);
         btnMapa = (Button) findViewById(R.id.btnMapa);
         btnViajesActuales = (Button) findViewById(R.id.btnViajesActuales);
+        btnGoogle = (SignInButton)findViewById(R.id.btngoogle);
+
 
         GoogleSignInOptions gso =
                 new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                         .requestEmail()
                         .build();
 
-        final GoogleApiClient apiClient = new GoogleApiClient.Builder(this)
+        apiClient = new GoogleApiClient.Builder(this)
                 .enableAutoManage(this, null)
                 .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
                 .build();
 
 
-        btnGoogle = (SignInButton)findViewById(R.id.btngoogle);
         btnGoogle.setSize(SignInButton.SIZE_STANDARD);
         btnGoogle.setColorScheme(SignInButton.COLOR_LIGHT);
         btnGoogle.setScopes(gso.getScopeArray());
@@ -78,7 +85,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
-//...
+
 
 
         try {
@@ -173,7 +180,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
-    @Override
     public void onConnectionFailed(ConnectionResult connectionResult) {
         Toast.makeText(this, "Error de conexion!", Toast.LENGTH_SHORT).show();
         Log.e("GoogleSignIn", "OnConnectionFailed: " + connectionResult);
@@ -186,7 +192,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Toast.makeText(this,acct.getDisplayName()+" "+acct.getEmail(), Toast.LENGTH_SHORT).show();
         } else {
             //Usuario no logueado --> Lo mostramos como "Desconectado"
-
+            Toast.makeText(this,"Desconectado", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -211,12 +217,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void showProgressDialog() {
-        if (progressDialog == null) {
-            progressDialog = new ProgressDialog(this);
-            progressDialog.setMessage("Silent SignI-In");
-            progressDialog.setIndeterminate(true);
+        if (asd == null) {
+            asd = new ProgressDialog(this);
+            asd.setMessage("Silent SignI-In");
+            asd.setIndeterminate(true);
         }
-
-        progressDialog.show();
+        asd.show();
     }
+
+    private void hideProgressDialog() {
+        if (asd != null && asd.isShowing()) {
+            asd.hide();
+        }
+    }
+
 }
