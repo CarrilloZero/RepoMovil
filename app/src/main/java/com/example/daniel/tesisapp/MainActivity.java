@@ -1,25 +1,38 @@
 package com.example.daniel.tesisapp;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.example.daniel.tesisapp.beans.Notificacion;
 import com.example.daniel.tesisapp.beans.NotificacionDAO;
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.auth.api.signin.GoogleSignInResult;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.SignInButton;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.OptionalPendingResult;
+import com.google.android.gms.common.api.ResultCallback;
 
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Button btnBuscarEmpresa,btnMapa,btnBuscarViaje,btnViajesActuales;
+    private SignInButton btnGoogle;
     private ImageButton btnComentario;
     private int PERMISSION_CODE_1= 23;
 
@@ -41,6 +54,31 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnComentario = (ImageButton) findViewById(R.id.ibtnComentario);
         btnMapa = (Button) findViewById(R.id.btnMapa);
         btnViajesActuales = (Button) findViewById(R.id.btnViajesActuales);
+
+        GoogleSignInOptions gso =
+                new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                        .requestEmail()
+                        .build();
+
+        final GoogleApiClient apiClient = new GoogleApiClient.Builder(this)
+                .enableAutoManage(this, null)
+                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
+                .build();
+
+
+        btnGoogle = (SignInButton)findViewById(R.id.btngoogle);
+        btnGoogle.setSize(SignInButton.SIZE_STANDARD);
+        btnGoogle.setColorScheme(SignInButton.COLOR_LIGHT);
+        btnGoogle.setScopes(gso.getScopeArray());
+        btnGoogle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(apiClient);
+                startActivityForResult(signInIntent, RC_SIGN_IN);
+            }
+        });
+
+//...
 
 
         try {
@@ -66,6 +104,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+
+
 
         btnBuscarViaje.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -118,5 +158,65 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
 
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == RC_SIGN_IN) {
+            GoogleSignInResult result =
+                    Auth.GoogleSignInApi.getSignInResultFromIntent(data);
+
+            handleSignInResult(result);
+        }
+    }
+
+
+    @Override
+    public void onConnectionFailed(ConnectionResult connectionResult) {
+        Toast.makeText(this, "Error de conexion!", Toast.LENGTH_SHORT).show();
+        Log.e("GoogleSignIn", "OnConnectionFailed: " + connectionResult);
+    }
+
+    private void handleSignInResult(GoogleSignInResult result) {
+        if (result.isSuccess()) {
+            //Usuario logueado --> Mostramos sus datos
+            GoogleSignInAccount acct = result.getSignInAccount();
+            Toast.makeText(this,acct.getDisplayName()+" "+acct.getEmail(), Toast.LENGTH_SHORT).show();
+        } else {
+            //Usuario no logueado --> Lo mostramos como "Desconectado"
+
+        }
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        OptionalPendingResult<GoogleSignInResult> opr = Auth.GoogleSignInApi.silentSignIn(apiClient);
+        if (opr.isDone()) {
+            GoogleSignInResult result = opr.get();
+            handleSignInResult(result);
+        } else {
+            showProgressDialog();
+            opr.setResultCallback(new ResultCallback<GoogleSignInResult>() {
+                @Override
+                public void onResult(GoogleSignInResult googleSignInResult) {
+                    hideProgressDialog();
+                    handleSignInResult(googleSignInResult);
+                }
+            });
+        }
+    }
+
+    private void showProgressDialog() {
+        if (progressDialog == null) {
+            progressDialog = new ProgressDialog(this);
+            progressDialog.setMessage("Silent SignI-In");
+            progressDialog.setIndeterminate(true);
+        }
+
+        progressDialog.show();
     }
 }

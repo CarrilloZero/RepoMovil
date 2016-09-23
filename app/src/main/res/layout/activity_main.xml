@@ -72,6 +72,13 @@
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
 
+    <com.google.android.gms.common.SignInButton
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:id="@+id/btngoogle"
+        android:layout_below="@+id/btnViajesActuales"
+        android:layout_centerHorizontal="true" />
+
     <ListView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "285592340890",
+    "project_id": "tesismap-1314"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:285592340890:android:a44d6725f4358379",
+        "android_client_info": {
+          "package_name": "com.example.daniel.tesisapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "285592340890-2fm4ee3nvl802m57hq221h6a03t2u9c2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.daniel.tesisapp",
+            "certificate_hash": "C9C00E746B6F8BB2EF55E44E69D9995A34AE6188"
+          }
+        },
+        {
+          "client_id": "285592340890-123m1n69fnbv9j1o2jpmo1brc5p3d3tl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBWgRgg0u4PQETfXPgfBf-C1G8-FLOjCro"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
